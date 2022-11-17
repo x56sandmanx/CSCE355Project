@@ -1,0 +1,21 @@
+Number of nonhalting states: 6
+Alphabet: 01+_
+0 0 / 0 _ >   remove leading 0's from the binary number
+0 _ / 6 _ <   done; accept
+0 1 / 1 _ >   if not done, erase the leading 1
+1 0 / 1 0 >   move right across the number until _ or +
+1 1 / 1 1 >
+1 _ / 2 _ <
+1 + / 2 + <
+2 0 / 3 + <   save the digit in the state (3 or 4) and replace it with +
+2 1 / 4 + <
+2 _ / 6 + <   done; accept
+3 0 / 3 1 <   decrement the number while shifting it one cell to the left ...
+3 1 / 4 1 <
+3 _ / 1 _ >
+4 0 / 4 0 <
+4 1 / 5 0 <
+4 _ / 1 0 >
+5 0 / 4 1 <
+5 1 / 5 1 <
+5 _ / 1 1 >

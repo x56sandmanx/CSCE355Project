@@ -1,0 +1,24 @@
+Number of nonhalting states: 11
+Alphabet: 01_
+0 _ / 11 _ >    This TM implements a particular tag system:
+0 0 / 1 0 >       1. start with a binary string w as input
+0 1 / 3 1 >       2. while w is not the empty string:
+1 0 / 1 0 >          (a) if w starts with 0, append 00 onto w
+1 1 / 1 1 >          (b) if w starts with 1, append 1101 onto w
+1 _ / 2 0 >          (c) remove the first 3 digits of w
+2 _ / 7 0 <
+3 0 / 3 0 >     This computation may or may not halt.  It is known to
+3 1 / 3 1 >     halt on the initial string 100100100100100, but it takes
+3 _ / 4 1 >     a long time to do this.
+4 _ / 5 1 >
+5 _ / 6 0 >
+6 _ / 7 1 <
+7 0 / 7 0 <
+7 1 / 7 1 <
+7 _ / 8 _ >
+8 0 / 9 _ >
+8 1 / 9 _ >
+9 0 / 10 _ >
+9 1 / 10 _ >
+10 0 / 0 _ >
+10 1 / 0 _ >

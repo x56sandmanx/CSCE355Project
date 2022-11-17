@@ -1,0 +1,62 @@
+Number of nonhalting states: 16
+Alphabet: 01#ab_
+0 0 / 0 0 >    move right across the first number until #
+0 1 / 0 1 >
+0 # / 1 # <    # is seen; move left and go to state 1
+1 _ / 2 a >    mark next bit of 1st number with `a' (no carry); go to state 2
+1 0 / 2 a >
+1 1 / 2 b >
+2 0 / 2 0 >    move right across second number until _
+2 1 / 2 1 >
+2 # / 2 # >
+2 _ / 3 _ <    _ seen; move left and go to state 3
+3 0 / 4 _ <    erase the lsb of the 2nd number and record it in state (4 or 5)
+3 1 / 5 _ <
+3 # / 11 _ <   done with 2nd number; go to state 11
+4 0 / 4 0 <    storing 0 from 2nd number; move left until see the 'a' or 'b'
+4 1 / 4 1 <
+4 # / 4 # <
+4 a / 1 0 <    replace 'a' (no carry) with 0 and go back to state 1
+4 b / 1 1 <    replace 'b' (carry) with 1 and go back to state 1
+5 0 / 5 0 <    storing 1 from 2nd number; move left until 'a' or 'b'
+5 1 / 5 1 <
+5 # / 5 # <
+5 a / 1 1 <    replace 'a' (no carry) with 1 and go back to state 1
+5 b / 6 0 <    replace 'b' (carry) with 0 and go to state 6 to handle carry
+6 _ / 7 a >    replace next bit of 1st number with `a' or `b'; go to state 7
+6 0 / 7 a >
+6 1 / 7 b >
+7 0 / 7 0 >    move right across both numbers until _
+7 1 / 7 1 >
+7 # / 7 # >
+7 _ / 8 _ <    _ seen; move left and go to state 8
+8 0 / 9 _ <    record lsb of 2nd number in state (9 or 10); erase it
+8 1 / 10 _ <
+8 # / 12 _ <   done with 2nd number; erase # and go to state 12
+9 0 / 9 0 <
+9 1 / 9 1 <
+9 # / 9 # <
+9 a / 1 1 <    replace `a' with 1 and go to state 1
+9 b / 6 0 <    replace `b' with 0 and go to state 6 to handle carry
+10 0 / 10 0 <  move left until `a' or `b'
+10 1 / 10 1 <
+10 # / 10 # <
+10 a / 6 0 <   replace `a' with 0 and go to state 6 to handle carry
+10 b / 6 1 <   replace `b' with 1 and go to state 6 to handle carry
+11 0 / 11 0 <  start finishing up w/o carry; replace `a' with 0 and `b' with 1
+11 1 / 11 1 <
+11 a / 14 0 <
+11 b / 14 1 <
+12 0 / 12 0 <  start finishing up with carry; replace `a' with 1 and `b' with 0
+12 1 / 12 1 <
+12 a / 14 1 <
+12 b / 13 0 <
+13 1 / 13 0 <  I forgot what is done here ...
+13 _ / 14 1 <
+13 0 / 14 1 <
+14 0 / 14 0 <
+14 1 / 14 1 <
+14 _ / 15 _ >
+15 0 / 15 _ >
+15 1 / 16 1 <
+15 _ / 16 0 <
