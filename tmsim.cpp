@@ -175,6 +175,7 @@ int main(int argc, char *argv[])
                 cout<<"reject"<<endl;
             }
             
+            myFile.close();
             accepted = true;
         }
     }
